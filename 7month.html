@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Protest+Riot&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Anniversary Celebration</title>
+  </head>
+  <body>
+    <main class="container">
+      <!-- กำหนดรูปภาพเริ่มต้น -->
+      <img class="cat-img" id="catImage" src="https://media.tenor.com/-qBsG1HwR4oAAAAM/cat-dance-dancing-cat.gif" />
+      <p class="title">How many months have I been your boyfriend? 6 months</p>
+
+      <div class="buttons">
+        <!-- ปุ่ม Yes และ No ที่จะเปลี่ยนรูปภาพ -->
+        <button type="button" class="btn btn--yes" id="btnYes">Yes</button>
+        <button type="button" class="btn btn--no" id="btnNo">No</button>
+      </div>
+    </main>
+
+    <script type="module">
+      // รายการรูปภาพที่สามารถแสดงได้เมื่อกด Yes และ No
+      const yesImages = [
+        "https://media1.tenor.com/m/HDxa3RgwPz4AAAAd/cat-cats.gif"
+      ];
+
+      const noImages = [
+        "https://media.tenor.com/FAY10R60110AAAAM/cats-cute.gif",
+        "https://media.tenor.com/YuBEpX0liVQAAAAM/zaruth-cat.gif",
+        "https://media.tenor.com/Jg98kA1baIwAAAAM/cute-cat.gif",
+        "https://media.tenor.com/6vT_DoPOzq0AAAAM/sad-cat-cat-in-front-of-sea.gif",
+        "https://media.tenor.com/wSJZSQqIHhUAAAAM/love-cats-cat.gif"
+
+      ];
+
+      // ตัวแปรสำหรับการควบคุมการเปลี่ยนรูป
+      let yesIndex = 0;
+      let noIndex = 0;
+
+      // ฟังก์ชันที่ใช้ในการเปลี่ยนรูปภาพ
+      function changeImage(answer) {
+        const catImage = document.getElementById('catImage');
+        
+        if (answer === 'yes') {
+          // เปลี่ยนไปยังภาพถัดไปในอาร์เรย์
+          catImage.src = yesImages[yesIndex];
+          catImage.alt = "A happy cat celebrating"; // คำอธิบายรูปภาพที่เปลี่ยนแปลง
+          yesIndex = (yesIndex + 1) % yesImages.length; // เพิ่มตัวชี้ไปยังรูปภาพถัดไป
+        } else if (answer === 'no') {
+          // เปลี่ยนไปยังภาพถัดไปในอาร์เรย์
+          catImage.src = noImages[noIndex];
+          catImage.alt = "A sad cat"; // คำอธิบายสำหรับรูปภาพที่เป็น "No"
+          noIndex = (noIndex + 1) % noImages.length; // เพิ่มตัวชี้ไปยังรูปภาพถัดไป
+        }
+      }
+
+      // ใช้ addEventListener แทนการใช้ onclick ใน HTML
+      document.getElementById('btnYes').addEventListener('click', () => changeImage('yes'));
+      document.getElementById('btnNo').addEventListener('click', () => changeImage('no'));
+    </script>
+  </body>
+</html>
